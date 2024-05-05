@@ -2,15 +2,13 @@
 
 from domain.user import User
 from persistence.user_persistance import get_user_by_email_persistance
-from fastapi import HTTPException, status
 
 def get_user_by_email_controller(email):
 
     try:
         user = get_user_by_email_persistance(email)
     except Exception as e:
-        raise  HTTPException(
-            status_code=status.HTTP_404_NOT_FOUND,
+        raise  Exception(
             detail="User does not exist",
         )
     return User(

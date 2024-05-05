@@ -1,4 +1,4 @@
-from fastapi import APIRouter, Path
+from fastapi import APIRouter, Path,HTTPException, status
 
 from application.user_controller import get_user_by_email_controller
 
@@ -20,6 +20,9 @@ async def get_user_email(
     try:
         return get_user_by_email_controller(email)
     except Exception as e:
-        return e
+        raise  HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail="User does not exist",
+        )
 
 
