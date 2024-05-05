@@ -26,6 +26,10 @@ python main.py
 
 This will start the project and you can access it by navigating to [http://localhost:8000/docs](http://localhost:8000/docs) in your web browser.
 
+## WARNING
+
+Please note that while the database used by this project gets reset every time the project is turned off, the default or mock-up data will be restored upon restarting the project. However, any additional data added edited or deleted by users during the project session will be lost once the project is shut down. It is recommended to back up any user-generated data before shutting down the project to avoid loss of data.
+
 
 ## Features
 
