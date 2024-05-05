@@ -11,7 +11,7 @@ def get_user_by_email_controller(email):
         user = get_user_by_email_persistance(email)
     except Exception as e:
         logger.error(e)
-        raise  HTTPException(
+        raise HTTPException(
             status_code=status.HTTP_404_NOT_FOUND,
             detail="User does not exist",
         )
@@ -39,20 +39,20 @@ def add_playlist_controller(email, playlist):
     except HTTPException as e:
         raise e
     if user:
-        if is_playlist_duplicated(user,playlist):
-            raise  HTTPException(
-            status_code=status.HTTP_409_CONFLICT,
-            detail=f"Playlist {playlist} already exists",
-        )
+        if is_playlist_duplicated(user, playlist):
+            raise HTTPException(
+                status_code=status.HTTP_409_CONFLICT,
+                detail=f"Playlist {playlist} already exists",
+            )
         try:
             playlist_schema = Playlist(name=playlist)
             add_playlist_persistence(email, playlist_schema)
         except Exception as e:
             logger.error(e)
-            raise  HTTPException(
-            status_code=status.HTTP_409_CONFLICT,
-            detail=f"An error occured while creating the {playlist} playlist",
-        )
+            raise HTTPException(
+                status_code=status.HTTP_409_CONFLICT,
+                detail=f"An error occured while creating the {playlist} playlist",
+            )
         return f"Playlist {playlist} has been created"
 
 
