@@ -15,5 +15,4 @@ async def get_user_test():
 
     """
     """
-
-    return USERS
+    return ""
