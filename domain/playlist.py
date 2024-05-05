@@ -5,5 +5,5 @@ from domain.new import News
 
 class Playlist(BaseModel):
     name: str
-    likes: int
+    likes: Optional[int] = 0
     news_list: Optional[List[News]] = None

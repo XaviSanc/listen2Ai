@@ -1,6 +1,7 @@
-from fastapi import APIRouter, Path,HTTPException, status
+from fastapi import APIRouter, Path,HTTPException, status, Query
 
-from application.user_controller import get_user_by_email_controller
+from application.user_controller import get_user_by_email_controller,add_playlist_controller
+from domain.playlist import Playlist
 
 
 
@@ -19,10 +20,21 @@ async def get_user_email(
     """
     try:
         return get_user_by_email_controller(email)
-    except Exception as e:
-        raise  HTTPException(
-            status_code=status.HTTP_404_NOT_FOUND,
-            detail="User does not exist",
-        )
+    except HTTPException as e:
+        raise e
 
+
+@app.post("/v1/{email}/playlist")
+async def add_playlist(
+     email: str = Path(..., alias=None, title=None, description='Insert user email'),
+     playlist: str = Query(...)
+):
+
+    """
+    This endpoint purpose it to add a playlist into a users playlist list
+    """
+    try:
+        return add_playlist_controller(email, playlist)
+    except HTTPException as e:
+        raise e
 
